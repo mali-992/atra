@@ -16,7 +16,7 @@ const signup = async (req, res) => {
     res.status(500).json({ error });
   }
 };
-
+c
 const login = async (req, res) => {
   const { email, password } = req.body;
   try {
