@@ -18,20 +18,21 @@ const createCountry = async (req, res) => {
    try {
     const user = await User.findById(userId).populate("countries");
     let isExist=false
+    let newCountry
     if(user.countries){
         user.countries.forEach(element => {
-            element? element.name===country.name?isExist=true:element:element
+            element? element.name===country.name?newCountry=element:element:element
          });
     }
   
-    if (!isExist) {
-       const newCountry= await country.save();
+    if (!newCountry) {
+        newCountry= await country.save();
         await User.updateOne(
           { _id: userId },
           { $push: { countries: newCountry._id } }
         );
-    }
-    res.status(200).json({ message: "created country" });
+    } 
+    res.status(200).json(newCountry);
   } catch (error) {
     console.log(error);
     res.status(500).json({ error });
