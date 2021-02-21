@@ -11,9 +11,9 @@ export default function AddCountry(props) {
   };
   return (
     <div>
-      add country:{"  "}
-      <input type="text" name="name" ref={nameRef} placeholder="country name" />
-      <Button className="btn-sm" onClick={addButtonHandler}>
+      <label htmlFor="name" style={{marginLeft:"20px"}}><b>Add country:</b></label>
+      <input type="text" name="name" ref={nameRef} placeholder="country name" style={{marginLeft:"10px"}}/>
+      <Button className="btn-sm" style={{margin:"5px",marginBottom:"10px"}} onClick={addButtonHandler}>
         add
       </Button>
     </div>

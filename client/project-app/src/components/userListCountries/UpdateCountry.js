@@ -15,7 +15,7 @@ export default function UpdateCountry(props) {
   return (
     <>
       <>
-        <Button variant="primary" size="sm" onClick={handleShow}>
+        <Button variant="primary" size="sm" style={{margin:"5px"}} onClick={handleShow}>
           update
         </Button>
         {/* <React.StrictMode> */}

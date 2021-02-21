@@ -10,7 +10,9 @@ export default function CountriesSnapshot() {
         const result = await getAll();
         debugger;
         setCountriesData(result);
-      } catch (error) {}
+      } catch (error) {
+        console.log(error);
+      }
     };
     init();
   }, []);
@@ -18,7 +20,7 @@ export default function CountriesSnapshot() {
     try {
       await createCountry({ name: country.Country });
     } catch (error) {
-      
+      console.log(error);
     }
 
   };

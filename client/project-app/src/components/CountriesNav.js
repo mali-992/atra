@@ -9,9 +9,6 @@ export default function CountriesNav() {
   return (
     <div>
     <Hello/>
-      {/* <Link to="/nav/countriesSnapshot">Countries Snapshot</Link>
-      <Link to="/nav/userCountriesList">Countries Snapshot</Link> */}
-     
       <Nav variant="tabs" defaultActiveKey="defaultActive" >
   <Nav.Item>
     <LinkContainer to="/nav/countriesSnapshot">

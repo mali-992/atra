@@ -16,19 +16,15 @@ const signup = async (req, res) => {
     res.status(500).json({ error });
   }
 };
-c
+
 const login = async (req, res) => {
   const { email, password } = req.body;
   try {
     const [user] = await User.find({ email });
-    if (!user) {
+    if (!user||password.localeCompare(user.password)) {
      return res.status(401).json({ message: "Auth faild" });
     }
-    if(password.localeCompare(user.password)){
-      return res.status(401).json({
-        message: "Auth faild"
-    })
-    }
+   
     const token=jwt.sign({
       id:user._id, email
    },process.env.JWT_KEY)

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+//import "./userCountriesList.css"
 import { Button } from "react-bootstrap";
 import UpdateCountry from "./UpdateCountry";
 import {
@@ -59,7 +60,9 @@ export default function UserCountriesList() {
       await deleteCountry(id);
       list3.splice(index, 1);
       setList3([...list3]);
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
   const addHandler = async (country) => {
     try {
@@ -91,6 +94,9 @@ export default function UserCountriesList() {
                       onClick={() => {
                         deleteHandler(value.id, index);
                       }}
+                      size={20}
+                      color={"#ae0000"}
+                      style={{marginBottom:"5px"}}
                     />
                     <UpdateCountry
                       updateHandler={updateHandler}

@@ -23,7 +23,6 @@ function Signup(props) {
   const history=useHistory();
   const signup = async (values) => {
     try {
-      debugger;
      const {user,token}= await userService.signup(values);
      localStorage.setItem('token',token)
      setUserName(user.name)
@@ -34,8 +33,10 @@ function Signup(props) {
     }
   };
   return (
-    <div>
-      <h1>register form</h1>
+    <div className="container">
+      <div className="row justify-content-lg-center">
+        <div className="col col-lg-6">
+      <h1>Sign Up</h1>
       <Formik
         initialValues={{ name: "", email: "", password: "" }}
         onSubmit={signup}
@@ -88,6 +89,8 @@ function Signup(props) {
       </Formik>
       <Link to="/login">login</Link>
     </div>
+    </div>
+   </div>
   );
 }
 
