@@ -1,32 +1,29 @@
 import { useEffect, useState } from "react";
 import { getAll } from "../../services/countriesSnapshot.sevice";
 import { createCountry } from "../../services/countries.service";
-import S from "../userListCountries/UserCountriesList"
+
 export default function CountriesSnapshot() {
   const [countriesData, setCountriesData] = useState();
   useEffect(() => {
     const init = async () => {
       try {
         const result = await getAll();
-        debugger;
         setCountriesData(result);
       } catch (error) {
-        console.log(error);
+        alert(error);
       }
     };
     init();
   }, []);
-  const addCountryHandler =async (country) => {
+  const addCountryHandler = async (country) => {
     try {
       await createCountry({ name: country.Country });
     } catch (error) {
-      console.log(error);
+      alert(error);
     }
-
   };
   return (
     <div>
-
       {countriesData ? (
         <table className="table">
           <thead>

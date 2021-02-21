@@ -4,15 +4,6 @@ const mongoose=require('mongoose')
 const usersRoutes=require('./routes/usersApi')
 const countriesRoutes=require('./routes/countryApi')
  
-// mongoose.connect('mongodb://localhost:27017/atraProject',{
-//     useNewUrlParser:true,
-//     useUnifiedTopology:true,
-//     useCreateIndex:true
-//  }); 
-//  mongoose.connection.on("connected",()=>{
-//     console.log("connected!!!!")
-
-// })
 const connectionParams={
     useNewUrlParser:true,
     useUnifiedTopology:true,

@@ -74,7 +74,10 @@ function Login(props) {
               </button>
             </Form>
           </Formik>
-          <ErrorAlert isFail={authFaild} />
+          <ErrorAlert
+            isFail={authFaild}
+            content={"Incorrect username or password"}
+          />
           <Link to="/signup">sign up</Link>
         </div>
       </div>

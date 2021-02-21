@@ -8,7 +8,6 @@ const getAll = async (req, res) => {
     res.status(200).json({ countries });
   } catch (error) {
     res.status(500).json({ error });
-    console.log("kk")
   }
 };
 const createCountry = async (req, res) => {
@@ -17,14 +16,12 @@ const createCountry = async (req, res) => {
   const country = new Country({ name, userId});
    try {
     const user = await User.findById(userId).populate("countries");
-    let isExist=false
     let newCountry
     if(user.countries){
         user.countries.forEach(element => {
             element? element.name===country.name?newCountry=element:element:element
          });
-    }
-  
+    } 
     if (!newCountry) {
         newCountry= await country.save();
         await User.updateOne(

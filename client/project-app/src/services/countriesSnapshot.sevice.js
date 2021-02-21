@@ -16,24 +16,5 @@ const getAll = () => {
       throw error;
     });
 };
-const getByCountryName = async (countryName) => {
-  //   let country="kk";
-  //   try {
-  //     const countries = await getAll();
-  //     debugger;
-  //     countries.forEach((element) => {
-  //       if (element.name === countryName){country= element} ;
-  //     });
-  //   } catch (error) {}
-  //  return country
-  return getAll().then((countries) => {
-    let country=null
-    countries.forEach((element) => {
-      if (element.name === countryName) {
-        country = element;
-      }
-    });
-return country
-  });
-};
-export { getAll, getByCountryName };
+  
+export { getAll }

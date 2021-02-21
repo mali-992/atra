@@ -13,81 +13,93 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import AddCountry from "./AddCountry";
 
 export default function UserCountriesList() {
+  const [userList, setUserList] = useState();
   const [countriesList, setCountriesList] = useState();
-  const [list2, setList2] = useState();
-  const [list3, setList3] = useState();
+  const [userListData, setUserListData] = useState();
   useEffect(async () => {
     try {
       const res = await getCountries();
-      setCountriesList(res.countries);
+      setUserList(res.countries);
       const res2 = await getAll();
-      setList2(res2);
-    } catch (error) {}
+      setCountriesList(res2);
+    } catch (error) {
+      alert(error);
+    }
   }, []);
   useEffect(() => {
     let arr = [];
-    if (countriesList) {
-      countriesList.forEach((element) => {
-        const objData =
-          list2[list2.findIndex((x) => x.Country === element.name)];
+    if (userList) {
+      userList.forEach((element) => {
         let obj = {
           id: element._id,
           name: element.name,
-          data: list2[list2.findIndex((x) => x.Country === element.name)],
+          data:
+            countriesList[
+              countriesList.findIndex((x) => x.Country === element.name)
+            ],
         };
         arr = [...arr, obj];
       });
     }
-    setList3([...arr]);
-  }, [list2]);
+    setUserListData([...arr]);
+  }, [countriesList]);
   const updateHandler = async (id, values) => {
     try {
       await updateCountry(id, values);
-      const updatedList = list3.map((element) =>
+      const updatedList = userListData.map((element) =>
         element.id === id
           ? {
               ...element,
               ...values,
-              data: list2[list2.findIndex((x) => x.Country === values.name)],
+              data:
+                countriesList[
+                  countriesList.findIndex((x) => x.Country === values.name)
+                ],
             }
           : element
       );
-      setList3([...updatedList]);
-    } catch (error) {}
+      setUserListData([...updatedList]);
+    } catch (error) {
+      alert(error);
+    }
   };
   const deleteHandler = async (id, index) => {
     try {
       await deleteCountry(id);
-      list3.splice(index, 1);
-      setList3([...list3]);
+      userListData.splice(index, 1);
+      setUserListData([...userListData]);
     } catch (error) {
-      console.log(error);
+      alert(error);
     }
   };
   const addHandler = async (country) => {
     try {
       const newCountry = await createCountry(country);
-      list3.push({
+      userListData.push({
         id: newCountry._id,
         name: newCountry.name,
-        data: list2[list2.findIndex((x) => x.Country === newCountry.name)],
+        data:
+          countriesList[
+            countriesList.findIndex((x) => x.Country === newCountry.name)
+          ],
       });
-      setList3([...list3])
+      setUserListData([...userListData]);
     } catch (error) {
-      console.log(error);
+      alert(error);
     }
   };
   return (
     <div>
       <div>
         <ul>
-          {list3
-            ? list3.map((value, index) => {
+          {userListData
+            ? userListData.map((value, index) => {
                 return (
                   <li key={index}>
-                    <b> {`${value.name}, `}</b>
+                    <b style={{ textDecoration: "underline" }}>{value.name}</b>
+                    {" Data: "}
                     {value.data
-                      ? `Data: total confirmed- ${value.data.TotalConfirmed}, total deaths- ${value.data.TotalDeaths}, Total recovered- ${value.data.TotalRecovered}`
+                      ? `total confirmed- ${value.data.TotalConfirmed}, total deaths- ${value.data.TotalDeaths}, Total recovered- ${value.data.TotalRecovered}`
                       : "no details"}
 
                     <RiDeleteBin6Line
@@ -96,7 +108,7 @@ export default function UserCountriesList() {
                       }}
                       size={20}
                       color={"#ae0000"}
-                      style={{marginBottom:"5px"}}
+                      style={{ marginBottom: "5px" }}
                     />
                     <UpdateCountry
                       updateHandler={updateHandler}
