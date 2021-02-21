@@ -10,7 +10,7 @@ function Hello(props) {
   const { name } = props;
   return (
     <h3>
-      <Badge variant="primary">Hello {name}</Badge>
+      <Badge variant="primary">Hello {name}!</Badge>
     </h3>
   );
 }
